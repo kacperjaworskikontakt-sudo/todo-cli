@@ -4,12 +4,28 @@ class Task():
         self.title = title
         self.done = done
         self.piority = piority
-        # Uruchamia sie automatycznie, nadaje parametry title i done
+        # Uruchamia sie automatycznie, nadaje parametry title, done, piority
+
     def __str__(self):
         if self.done:
             return f"[x] {self.title}"
         return f"[ ] {self.title}"
         #robi to co wyswieti sie po uzyciu print
+
+    def to_dict(self, title, done, piority,):
+        self.tasks = todolist.tasks 
+        for number, task in enumerate(self.tasks):
+            zadanie = {
+                "tytul": self.tasks[number],
+                "status": done,
+                "piorytet": piority
+            }
+
+        print(zadanie)
+
+    @classmethod
+    def from_dict(cls, title):
+        print(len(title))
 
 class TodoList:
     def __init__(self):
@@ -40,6 +56,13 @@ class TodoList:
             self.tasks.pop(number - 1)
         else:
             raise ValueError("Zły numer zadania")
+
+    def load(self):
+        pass
+#zrobic obie z json
+#zrobic tak zeby zadania wrzucac w dict wszystkie od razu z piorytetem i zrobieniem
+    def save(self):
+        pass
 
     def nz(self):
         for i in range(len(self.tasks)):
@@ -89,3 +112,7 @@ todolist.remove(1)
 todolist.mark_down(1)
 todolist.show()
 todolist.nz()
+
+task = Task("test", False, 3)
+task.to_dict("python", done=False, piority=2)
+task.from_dict("test")
